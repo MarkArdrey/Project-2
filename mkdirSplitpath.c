@@ -127,9 +127,9 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
         //what is most common to happen
         else 
         {
-            for (int i = 0; i < slashIndex; i++)
+            for (int j = 0; j < slashIndex; j++)
             {
-                dirTemp[i] = pathTemp[i];
+                dirTemp[j] = pathTemp[j];
             }
             dirTemp[slashIndex] = '\0';
             strcpy(dirName, dirTemp);
@@ -145,7 +145,7 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
 
     //finds the pointer to the parent directory of baseName
     struct NODE* currentNode = (pathName[0] == '/') ? root : cwd;
-    if(strlen(dirName) == 0)
+    if (strlen(dirName) == 0)
     {
         return currentNode;
     }
@@ -165,12 +165,15 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
         struct NODE* child = currentNode->childPtr;
         while(child != NULL)
         {
-            if (strcmp(child->name, currentDirName) != 0)
+            int found = 0;
+            if (strcmp(child->name, currentDirName) == 0 && child->fileType == 'D')
             {
-                child = child->siblingPtr;
+                found = 1;
+                break;
             }
+            child = child->siblingPtr;
         }
-        if (child == NULL)
+        if (!found)
         {
             printf("ERROR: directory %s does not exist\n", currentDirName);
             return NULL;
