@@ -162,7 +162,7 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
     char* currentDirName = strtok(dirCopy, "/");
     while(currentDirName != NULL)
     {
-        int found;
+        int found = 0;
         struct NODE* child = currentNode->childPtr;
         while(child != NULL)
         {
@@ -184,3 +184,4 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
 
     return currentNode;
 }
+
