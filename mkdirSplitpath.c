@@ -58,6 +58,7 @@ void mkdir(char pathName[]){
         {
             printf("MKDIR ERROR: directory %s/%s already exists\n", dirName, baseName);
         }
+        return;
     }
 
     //initializes new directory node using malloc
@@ -184,4 +185,3 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
 
     return currentNode;
 }
-
